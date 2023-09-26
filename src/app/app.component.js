@@ -1,50 +1,40 @@
 //toggle button
 const details = document.querySelector('summary');
 
-document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
-  if (details.parentNode.getAttribute('open')) {
-        details.parentNode.removeAttribute('open');
+function showOrHideDesc() {
+  if (document.querySelector(".description").hidden == true){
+    document.querySelector(".description").hidden = false;
   }
   else {
-    details.parentNode.setAttribute('open','open');    
+    document.querySelector(".description").hidden = true;
+
   }
-});
+}
 
-//duplicate button
-document.querySelector('.duplicate').addEventListener('click', function(e) {
-  const cardToClone = document.querySelector('.card').cloneNode(true);
-  document.body.appendChild(cardToClone);
-});
-
-//delete button
-document.querySelector('#deletecard').addEventListener('click', function(e) {
-  let wantsTo = confirm("Are you sure?");
-  if (wantsTo) {
-    if (document.querySelector('.card:last-child') !== document.querySelector('.card')) {
-      document.querySelector('.card:last-child').remove();      
-    }
-    else {
-      alert("Cannot original last card");
-    }
+function changeBackColor() {
+  /*
+not sure about this
+  */
+  if (document.querySelector(".wrapper").style.backgroundColor == 'white') {
+    document.querySelector(".wrapper").style.backgroundColor = 'red';
+  } else {
+    document.querySelector(".wrapper").style.backgroundColor = 'white';
   }
+}
+
+function changeHeading() {
+  document.querySelector(".header").innerHTML = "<h1>something else</h1>";
+}
+
+document.querySelector(".dup-button").addEventListener("click", (e) => {
+  const card = document.querySelector(".wrapper");
+  const cardCopy = card.cloneNode(true);
+  card.appendChild(cardCopy);
+  card.parentNode.insertBefore(cardCopy, card.nextSibling);
+  
 });
 
-//change title button
-document.querySelector('.changetxt').addEventListener('click', function(e) {
-  let name = "Something else";
-  if (name) {
-    document.querySelector('.card h3').innerText = name;
-  }
-});
-
-//change background
-const card = document.querySelector('#card');
-        let backgroundColor = false;
-    document.querySelector('#changebackground').addEventListener('click', function(e) {
-            if (backgroundColor) {
-                card.style.backgroundColor = 'white';
-            } else {
-                card.style.backgroundColor = 'gray';
-            }
-            backgroundColor = !backgroundColor;
-        });
+function deleteCard() {
+  const card = document.querySelector(".wrapper");
+  card.remove();
+}
